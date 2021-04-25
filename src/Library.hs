@@ -1,17 +1,34 @@
 module Library where
 import PdePreludat
 
-doble :: Number -> Number
-doble numero = numero + numero
+type Horas = Number
+type Objetivo = String
+type Presion = Number
+type Golpe = Objetivo -> Number
 
-poderDeGolpe :: Number -> Number
+poderDeGolpe :: Horas -> Number
+poderDeGolpe  = (15*)
 
-poderDeGolpe horas = 15 * horas
+fortalezaDelObjetivo :: Objetivo -> Number
+fortalezaDelObjetivo = (2*) . length 
 
-fortalezaDelObjetivo :: String -> Number
+presionDelGolpe :: Horas -> Objetivo -> Presion
+presionDelGolpe horas objetivo = poderDeGolpe horas / fortalezaDelObjetivo objetivo
 
-fortalezaDelObjetivo nombre = 2 * length nombre 
+gomuGomu :: Golpe
+gomuGomu = presionDelGolpe 180
 
-presionDelGolpe :: Number -> String -> Number
+golpesNormales :: Golpe
+golpesNormales = presionDelGolpe 240
 
-presionDelGolpe a b = poderDeGolpe a / fortalezaDelObjetivo b
+objetivoDificil :: Objetivo -> Bool
+objetivoDificil objetivo = gomuGomu objetivo < 100
+
+focalizarObjetivo :: Objetivo -> String
+focalizarObjetivo = take 7
+
+accesibilidad :: Objetivo -> Presion
+accesibilidad = golpesNormales . focalizarObjetivo
+
+objetivoAccesible :: Objetivo -> Bool
+objetivoAccesible objetivo = 200 < accesibilidad objetivo && 400 > accesibilidad objetivo
