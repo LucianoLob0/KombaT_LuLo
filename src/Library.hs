@@ -30,5 +30,8 @@ focalizarObjetivo = take 7
 accesibilidad :: Objetivo -> Presion
 accesibilidad = golpesNormales . focalizarObjetivo
 
+entre :: Number -> Number -> Number -> Bool 
+entre alto bajo medio = bajo < medio && medio < alto
+
 objetivoAccesible :: Objetivo -> Bool
-objetivoAccesible objetivo = 200 < accesibilidad objetivo && 400 > accesibilidad objetivo
+objetivoAccesible = ( entre 400 200 ) . accesibilidad

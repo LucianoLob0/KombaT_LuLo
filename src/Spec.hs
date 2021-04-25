@@ -45,6 +45,15 @@ correrTests = hspec $ do
       accesibilidad "Bolsa de Entrenamiento" `shouldBe` 257.142857143 
       accesibilidad "Puf" `shouldBe` 600
 
+  describe "entre" $ do
+    it "Indica si un número está entre otros dos números" $ do
+      entre 5 2 4 `shouldBe` True 
+      entre 5 2 1 `shouldBe` False
+      entre 5 2 6 `shouldBe` False
+      entre 5 2 2 `shouldBe` False
+      entre 5 2 5 `shouldBe` False
+      entre 5.3 2.7 4.5 `shouldBe` True
+
   describe "objetivoAccesible" $ do
     it "Accesibilidad entre 200 y 400 de presión" $ do
       objetivoAccesible "Bolsa de Entrenamiento" `shouldBe` True 
